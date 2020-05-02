@@ -4,7 +4,7 @@
 	"description": "A mini shopping cart experience using React.js",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server --mode development",
+		"start": "NODE_ENV=production node src/server/server.prod.js",
 		"start:dev": "nodemon --watch src/config --watch src/server src/server/server.dev.js",
 		"build": "NODE_ENV=production webpack --config=src/config/webpack.config.prod.js --env.NODE_ENV=production",
 		"prod": "NODE_ENV=production node src/server/server.prod.js"

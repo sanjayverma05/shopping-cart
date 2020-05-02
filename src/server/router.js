@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const path = require("path");
 
 router.get("/api/items", (req, res) => {
-	fs.readFile("src/services/items-list.json", (err, json) => {
+	fs.readFile(path.join(__dirname, "../../src/services/items-list.json"), (err, json) => {
 		if (err) {
 			res.send({
-				code: 404,
+				code: 123,
 				message: err,
 			});
 		}

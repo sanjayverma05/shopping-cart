@@ -1,0 +1,135 @@
+$border-radius: 20px;
+
+$primary: #709fdc;
+$base: $blue;
+$shadow-color: #274684;
+$lighter-shadow: rgba($shadow-color, 0.2);
+$white: #fff;
+$gray: #8c8c8c;
+$lighter-gray: rgba($gray, 0.1);
+$time-line-width: 100%;
+$transition: 0.3s all ease;
+
+.filter-sidebar {
+  &__heading {
+    color: $black;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  &__cta {
+    text-align: center;
+    width: 100px;
+    background: #0000cd;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+  }
+}
+
+@mixin dragIndicator($property, $background, $z-index) {
+  #{$property} {
+    position: absolute;
+    top: 0;
+    z-index: $z-index;
+    width: 0;
+    height: 5px;
+    border-radius: 5px;
+    background: $background;
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+      &::after {
+        opacity: 1;
+      }
+    }
+    &::before {
+      opacity: 0;
+      content: attr(data-content);
+      display: block;
+      position: absolute;
+      top: -40px;
+      right: -23px;
+      width: auto;
+      padding: 3px;
+      text-align: center;
+      color: white;
+      background: $shadow-color;
+      border-radius: $border-radius;
+    }
+    &::after {
+      opacity: 0;
+      content: "";
+      display: block;
+      position: absolute;
+      top: -18px;
+      right: -8px;
+      border-top: 8px solid $shadow-color;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+    #{$property}-drag {
+      position: absolute;
+      right: -7.5px;
+      top: -5px;
+
+      width: 15px;
+      height: 15px;
+
+      border-radius: 50%;
+      background: $base;
+      transition: all 0.3s;
+      &:hover {
+        box-shadow: 0 0 0 6px $lighter-shadow;
+      }
+    }
+  }
+}
+
+.filter-sidebar {
+  overflow: hidden;
+  padding: 10px;
+  .card {
+    margin-bottom: 30px;
+  }
+  .values {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: $time-line-width;
+  }
+  #slider {
+    position: relative;
+    margin: 0 auto;
+    width: $time-line-width;
+    height: 5px;
+    background: $primary;
+    border-radius: 5px;
+    cursor: pointer;
+
+    @include dragIndicator("#min", $primary, 2);
+    @include dragIndicator("#max", $shadow-color, 1);
+  }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px $primary;
+}

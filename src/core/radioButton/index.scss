@@ -1,0 +1,26 @@
+.radio-btn-group {
+  padding: 5px;
+  display: flex;
+}
+.radiobtn {
+  display: inline-flex;
+  width: 1em;
+  border: 1px solid;
+  height: 1em;
+  border-radius: 1em;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 11px; */
+  font-size: 24px;
+
+  &.checked:before {
+    content: " ";
+    /* position: absolute; */
+    height: 0.5em;
+    width: 0.5em;
+    background: $blue;
+    border-radius: 1em;
+    line-height: 1;
+  }
+}

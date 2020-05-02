@@ -1,0 +1,33 @@
+.utility-header {
+    display: flex;
+    & .container {
+        display: flex;
+    }
+    &__container {
+        border-bottom: 1px solid darkgray;
+        @include breakpoint(xlarge) {
+            display: none;
+        }
+    }
+    &__sort,
+    &__filter{
+        flex: 1;
+        padding: 10px 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        // width: 50%;
+    }
+    &__sort{
+        border-right: 1px solid darkgray;
+    }
+    & .icon-sort-amount-asc {
+        margin-right: 8px;
+        font-size: 14px;
+    }
+    & .icon-filter {
+        font-size: 19px;
+        margin-right: 3px;
+
+    }
+}

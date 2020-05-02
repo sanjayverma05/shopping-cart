@@ -1,0 +1,32 @@
+.sortbar {
+    padding: 5px 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    display: none;
+    @include breakpoint(xlarge){
+        display: flex;
+    }
+
+    &__heading {
+        color: $black;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1.2;
+        margin-right: 25px;
+    }
+    &__sort-option{
+        color: $black;
+        font-size: 16px;
+        line-height: 1.2;
+        margin-right: 25px;
+        
+        &:hover,
+        &--active {
+            color: $blue;
+            line-height: 1.4;
+            border-bottom: 1px solid $blue;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+body {
+  font-family: $font-body;
+  font-size: 16px;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 0 20px;
+
+  @include breakpoint(xlarge) {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
+.sidebar-container {
+  display: none;
+  width: 300px;
+  border: 1px solid $dark-grey;
+  box-shadow: 5px 0px 4px -3px $light-grey;
+  padding: 20px 10px;
+
+  @include breakpoint(xlarge) {
+    display: block;
+  }
+}

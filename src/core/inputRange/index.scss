@@ -1,0 +1,10 @@
+.input-range {
+    &__holder {
+        text-align: center;
+        color: $dark-grey;
+        font-size: 14px;
+    }
+    &__input-el {
+    width: 100%;
+    }
+}

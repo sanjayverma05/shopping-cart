@@ -1,0 +1,18 @@
+.select-view {
+  display: flex;
+  background-color: $light-silver;
+  flex-direction: column;
+  & .container {
+    padding: 0;
+    display: flex;
+    flex: 1;
+  }
+  min-height: 86vh;
+}
+.list-container {
+  @include breakpoint(xlarge) {
+    padding: 10px 0;
+    padding: 10px;
+    width: calc(100% - 300px);
+  }
+}

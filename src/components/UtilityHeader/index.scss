@@ -1,33 +1,67 @@
 .utility-header {
-    display: flex;
-    & .container {
-        display: flex;
-    }
-    &__container {
-        border-bottom: 1px solid darkgray;
-        @include breakpoint(xlarge) {
-            display: none;
-        }
-    }
-    &__sort,
-    &__filter{
-        flex: 1;
-        padding: 10px 0;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        // width: 50%;
-    }
-    &__sort{
-        border-right: 1px solid darkgray;
-    }
-    & .icon-sort-amount-asc {
-        margin-right: 8px;
-        font-size: 14px;
-    }
-    & .icon-filter {
-        font-size: 19px;
-        margin-right: 3px;
-
-    }
+	display: flex;
+	& .container {
+		display: flex;
+	}
+	&__container {
+		border-bottom: 1px solid darkgray;
+		@include breakpoint(xlarge) {
+			display: none;
+		}
+	}
+	&__sort,
+	&__filter {
+		flex: 1;
+		padding: 10px 0;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		// width: 50%;
+	}
+	&__sort {
+		border-right: 1px solid darkgray;
+	}
+	& .icon-sort-amount-asc {
+		margin-right: 8px;
+		font-size: 14px;
+	}
+	& .icon-filter {
+		font-size: 19px;
+		margin-right: 3px;
+	}
+}
+.filter-modal {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.filter-current-values {
+	display: flex;
+	justify-content: center;
+	color: $dark-grey;
+}
+.filter-limit-values {
+	display: flex;
+	justify-content: space-between;
+}
+.sort-items-modal {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.sort-items-modal__content {
+	justify-content: center;
+	display: flex;
+	margin-top: 5%;
+}
+.filter-modal {
+	flex: 1;
+	justify-content: space-between;
+	flex-direction: column;
+	display: flex;
+	& .filter-current-values {
+		margin-top: 10%;
+	}
 }

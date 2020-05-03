@@ -100,6 +100,5 @@ router.get("/api/items", (req, res) => {
 	};
 	res.json(obj);
 });
-router.get("/", express.static("dist"));
 
 module.exports = router;

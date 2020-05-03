@@ -21,6 +21,14 @@ export const AppContext = React.createContext({
 	reduceItemFromCart: () => {},
 	applyFilter: () => {},
 	removeFilter: () => {},
+	maxFilterValue: 1000,
+	minFilterValue: 0,
+	currentMinValue: 0,
+	currentMaxValue: 1000,
+	setCurrentMinValue: () => {},
+	setCurrentMaxValue: () => {},
+	currency: "₹",
+	viewport: "large",
 });
 
 const SelectItemView = (props) => (
@@ -46,6 +54,11 @@ const ShoppingCart = () => {
 	let [sortOrder, updateSortOrder] = useState("");
 	let [searchText, changeSeachText] = useState("");
 	let [checkoutItemCount, updateCheckoutItemCount] = useState(0);
+	let [minFilterValue, setMinFilterValue] = useState(0);
+	let [maxFilterValue, setMaxFilterValue] = useState(10000);
+	let [currentMinValue, setCurrentMinValue] = useState(0);
+	let [currentMaxValue, setCurrentMaxValue] = useState(10000);
+	const [viewport, setViewport] = useState(getViewPort());
 
 	const applyFilter = (min, max) => {
 		let updatedItems = [...cachedItems];
@@ -132,14 +145,49 @@ const ShoppingCart = () => {
 	const sortItems = (order) => {
 		updateSortOrder(order);
 	};
+	function getViewPort() {
+		const { innerWidth: width } = window;
+		if (width < 768) {
+			return "small";
+		} else if (width >= 768 && width < 1024) {
+			return "medium";
+		} else if (width >= 1024 && width < 1152) {
+			return "large";
+		} else {
+			return "xlarge";
+		}
+	}
 
 	useEffect(() => {
 		fetch("/api/items")
 			.then((res) => res.json())
-			.then((response) => {
-				updateItems(response.itemList);
-				updateCachedItems([...response.itemList]);
+			.then(({ itemList = [] }) => {
+				if (itemList.length > 0) {
+					let minValue = 0,
+						maxValue = 0;
+
+					updateItems([...itemList]);
+					updateCachedItems([...itemList]);
+					itemList.sort((a, b) => {
+						return a.price.actual - b.price.actual;
+					});
+					minValue =
+						((itemList[0] && itemList[0].price["actual"]) || minFilterValue) - 4000 || minFilterValue;
+					maxValue =
+						itemList[itemList.length - 1] && itemList[itemList.length - 1]["price"]["actual"]
+							? itemList[itemList.length - 1]["price"]["actual"] + 4000
+							: maxFilterValue;
+					setMinFilterValue(minValue);
+					setMaxFilterValue(maxValue);
+					setCurrentMinValue(itemList[0].price["actual"]);
+					setCurrentMaxValue(itemList[itemList.length - 1]["price"]["actual"]);
+				}
 			});
+		function handleResize() {
+			setViewport(getViewPort());
+		}
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
 	useEffect(() => {
@@ -170,6 +218,14 @@ const ShoppingCart = () => {
 					reduceItemFromCart,
 					applyFilter,
 					removeFilter,
+					maxFilterValue,
+					minFilterValue,
+					currentMinValue,
+					currentMaxValue,
+					setCurrentMinValue,
+					setCurrentMaxValue,
+					currency: "₹",
+					viewport,
 				}}
 			>
 				<Router>

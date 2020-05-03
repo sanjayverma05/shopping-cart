@@ -16,8 +16,8 @@ module.exports = (env) => {
 		output: {
 			path: path.resolve(__dirname, "../dist"),
 			publicPath: "/",
-			filename: "[name]-bundle.js",
-			chunkFilename: "[name].js",
+			filename: "[name]-bundle-[contenthash].js",
+			chunkFilename: "[name]-[contenthash].js",
 		},
 		optimization: {
 			splitChunks: {

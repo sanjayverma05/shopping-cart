@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { AppContext } from "Components/App";
 import TwoThumbSlider from "CoreComponents/twoThumbSlider";
+import { rangeFilter } from "Stores/shoppingStore/actions";
 
 import styles from "./index.scss";
 
@@ -11,67 +12,41 @@ class FilterSidebar extends React.Component {
 		this.state = { currentMin: 0, currentMax: 0 };
 	}
 
-	componentDidUpdate() {
-		let { currentMinValue, currentMaxValue } = this.context;
-		let { currentMin, currentMax } = this.state;
-		if (currentMinValue !== currentMin) {
-			this.setState({
-				currentMin: currentMinValue,
-			});
-		}
-		if (currentMaxValue !== currentMax) {
-			this.setState({
-				currentMax: currentMaxValue,
-			});
-		}
-	}
+	onChange = ([minVal, maxVal]) => {
+		let { dispatch } = this.props;
 
-	onChange = ([min, max]) => {
-		let { setCurrentMinValue, setCurrentMaxValue } = this.context;
-		this.setState({
-			currentMin: min,
-			currentMax: max,
-		});
-		setCurrentMinValue(min);
-		setCurrentMaxValue(max);
+		dispatch(rangeFilter([minVal, maxVal]));
+	};
+	onUpdate = ([minVal, maxVal]) => {
+		let { dispatch } = this.props;
+
+		dispatch(rangeFilter([minVal, maxVal]));
 	};
 
 	render() {
 		const {
-			applyFilter,
-			maxFilterValue,
-			minFilterValue,
 			currency,
-			currentMinValue,
-			currentMaxValue,
 		} = this.context;
-		let { currentMin, currentMax } = this.state;
+		let { min, max, defaultMin, defaultMax } = this.props.range;
 		return (
 			<div className="filter-sidebar">
-				<h3 className="filter-sidebar__heading">Filters</h3>
+				<h3 className="filter-sidebar__heading">Price Filter</h3>
 				<div className="filter-current-values">
-					<span>{`${currency}${currentMin || currentMinValue}`}</span>&nbsp;-&nbsp;
-					<span>{`${currency}${currentMax || currentMaxValue}`}</span>
+					<span>{`${currency}${min}`}</span>&nbsp;-&nbsp;
+					<span>{`${currency}${max}`}</span>
 				</div>
 				<TwoThumbSlider
+					currentMin={min}
+					currentMax={max}
+					minFilterValue={defaultMin}
+					maxFilterValue={defaultMax}
 					onChange={this.onChange.bind(this)}
-					currentMin={currentMin}
-					currentMinValue={currentMinValue}
-					currentMax={currentMax}
-					currentMaxValue={currentMaxValue}
-					// onUpdate,
-					// onChange,
-					minFilterValue={minFilterValue}
-					maxFilterValue={maxFilterValue}
+					onUpdate={this.onUpdate.bind(this)}
 				/>
 				<div className="filter-limit-values">
-					<span>{`${currency}${minFilterValue}`}</span>
-					<span>{`${currency}${maxFilterValue}`}</span>
+					<span>{`${currency}${defaultMin}`}</span>
+					<span>{`${currency}${defaultMax}`}</span>
 				</div>
-
-				<a className="filter-sidebar__cta" onClick={() => applyFilter(currentMin, currentMax)}>
-					Apply
-				</a>
 			</div>
 		);
 	}

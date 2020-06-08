@@ -1,17 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addItems } from "Stores/shoppingStore/actions";
 import styles from "./index.scss";
-import { AppContext } from "Components/App";
 
 const currency = "₹";
 const ShoppingList = () => {
-  let { items, addItemsToCart } = useContext(AppContext);
+  let addItemsToCart = ()=>{};
+  let itemList = useSelector(({ items }) => items.itemList);
+  // console.log(addItems, removeItem, reduceItem);
 
   return (
-    <div className="shopping-list">
-      {items.map((item, index) => (
-        <ShoppingItem item={item} key={index} addItemsToCart={addItemsToCart} />
-      ))}
-    </div>
+		<div className="shopping-list">
+			{itemList.map((item, index) => (
+				<ShoppingItem item={item} key={index} addItemsToCart={addItemsToCart} />
+			))}
+		</div>
   );
 };
 
@@ -22,26 +25,26 @@ const ShoppingItem = ({ item, addItemsToCart }) => {
     price: { actual, display },
     discount,
   } = item;
+  const dispatch = useDispatch();
   return (
-    <div className="shopping-list-item">
-      <div className="shopping-list-item__img-holder">
-        <img className="shopping-list-item__img" src={image} alt={name} />
-      </div>
-      <div className="shopping-list-item__label">{name}</div>
-      <div className="shopping-list-item__price">
-        <span>
-          <span className="shopping-list-item__price--actual">{`${currency}${actual}`}</span>
-          <span className="shopping-list-item__price--display">{`${display}`}</span>
-        </span>
-        <span className="shopping-list-item__price--discount">{`${discount}% off`}</span>
-      </div>
-      <a
-        className="shopping-list-item__add-to-cart-cta"
-        onClick={() => addItemsToCart(item)}
+		<div className="shopping-list-item">
+			<div className="shopping-list-item__img-holder">
+				<img className="shopping-list-item__img" src={image} alt={name} />
+			</div>
+			<div className="shopping-list-item__label">{name}</div>
+			<div className="shopping-list-item__price">
+				<span>
+					<span className="shopping-list-item__price--actual">{`${currency}${actual}`}</span>
+					<span className="shopping-list-item__price--display">{`${display}`}</span>
+				</span>
+				<span className="shopping-list-item__price--discount">{`${discount}% off`}</span>
+			</div>
+      <a className="shopping-list-item__add-to-cart-cta" 
+      onClick={()=>dispatch(addItems(item))}
       >
-        Add to Cart
-      </a>
-    </div>
+				Add to Cart
+			</a>
+		</div>
   );
 };
 

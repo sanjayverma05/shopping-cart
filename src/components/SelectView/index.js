@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
+import {useSelector} from "react-redux";
 import SideBar from "Components/SideBar";
 import SortBar from "Components/SortBar";
 import ShoppingList from "Components/ShoppingList";
 import UtilityHeader from "Components/UtilityHeader";
-import { AppContext } from "Components/App";
 
 import styles from "./index.scss";
 
 const SelectView = () => {
-	const { viewport } = useContext(AppContext);
+	let viewport = useSelector(({ ui }) => ui.viewport);
 	return (
 		<section className="select-view">
 			{viewport !== "xlarge" && (

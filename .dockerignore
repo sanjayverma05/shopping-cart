@@ -1,0 +1,4 @@
+node_modules
+.vscode
+fe-dist
+be-dist

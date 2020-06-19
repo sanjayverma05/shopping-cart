@@ -17,6 +17,7 @@ const ModalContainer = ({ children, onClose, heading }) => {
 
 	return (
 		<div className="shopping-cart-modal__container">
+			<div className="shopping-cart-modal_blur-overlay"></div>
 			<div className={`shopping-cart-modal ${isClosing ? "shopping-cart-modal--closing" : ""}`}>
 				{/* <a className="shopping-cart-modal__close" onClick={toggleModal}></a> */}
 				<h3 className="shopping-cart-modal__heading">{heading}</h3>
@@ -27,20 +28,23 @@ const ModalContainer = ({ children, onClose, heading }) => {
 };
 
 const Modal = ({ children, showModal, onClose, heading, onSubmit }) => {
-	const modalRoot = document.getElementById("modal-root");
-	const el = document.createElement("div");
+	if (typeof window !== 'undefined') {
+		const modalRoot = document.getElementById("modal-root");
+		const el = document.createElement("div");
 
-	useEffect(() => {
-		modalRoot.appendChild(el);
+		useEffect(() => {
+			modalRoot.appendChild(el);
 
-		return () => {
-			modalRoot.removeChild(el);
-		};
-	}, [el, showModal]);
+			return () => {
+				modalRoot.removeChild(el);
+			};
+		}, [el, showModal]);
 
-	return showModal
-		? createPortal(<ModalContainer children={children} onClose={onClose} heading={heading} />, el)
-		: null;
+		return showModal
+			? createPortal(<ModalContainer children={children} onClose={onClose} heading={heading} />, el)
+			: null;
+	} 
+	return null
 };
 
 export default Modal;

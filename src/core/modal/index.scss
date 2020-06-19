@@ -73,7 +73,6 @@
 		top: 0;
 		bottom: 0;
 		z-index: 99;
-		background: grey;
 		overflow: hidden;
 		display: flex;
 		align-items: center;
@@ -104,5 +103,14 @@
 			font-weight: bold;
 			line-height: 1em;
 		}
+	}
+	&_blur-overlay{
+		position: absolute;
+		background: black;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		filter: opacity(0.9);
 	}
 }

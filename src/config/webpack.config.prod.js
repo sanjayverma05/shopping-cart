@@ -14,10 +14,10 @@ module.exports = (env) => {
 		entry: ["./src/templates/index.js"],
 		mode: "production",
 		output: {
-			path: path.resolve(__dirname, "../dist"),
+			path: path.resolve(__dirname, "../../fe-dist"),
 			publicPath: "/",
-			filename: "[name]-bundle-[contenthash].js",
-			chunkFilename: "[name]-[contenthash].js",
+			filename: "[name]-bundle.js",
+			chunkFilename: "[name].js",
 		},
 		optimization: {
 			splitChunks: {
@@ -49,6 +49,7 @@ module.exports = (env) => {
 				Templates: path.resolve(__dirname, "../templates/"),
 				CoreComponents: path.resolve(__dirname, "../core"),
 				Utility: path.resolve(__dirname, "../utility"),
+				Stores: path.resolve(__dirname, "../stores"),
 			},
 		},
 		module: {
@@ -100,10 +101,10 @@ module.exports = (env) => {
 				canPrint: true,
 			}),
 			new UglifyJSPlugin(),
-			new HtmlWebpackPlugin({
-				template: "./src/templates/index.html",
-				title: "Homepage",
-			}),
+			// new HtmlWebpackPlugin({
+			// 	template: "./src/templates/index.html",
+			// 	title: "Homepage",
+			// }),
 			new webpack.DefinePlugin({
 				"process.env": {
 					NODE_ENV: JSON.stringify(env.NODE_ENV),

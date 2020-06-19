@@ -179,4 +179,7 @@
 }
 .checkout-view {
   min-height: 86vh;
+  @include breakpoint(large) {
+      padding-top: 20px;
+  }
 }

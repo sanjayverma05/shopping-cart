@@ -5,20 +5,18 @@ import styles from "./index.scss";
 
 const currency = "₹";
 const ShoppingList = () => {
-  let addItemsToCart = ()=>{};
   let itemList = useSelector(({ items }) => items.itemList);
-  // console.log(addItems, removeItem, reduceItem);
 
   return (
 		<div className="shopping-list">
 			{itemList.map((item, index) => (
-				<ShoppingItem item={item} key={index} addItemsToCart={addItemsToCart} />
+				<ShoppingItem item={item} key={index}  />
 			))}
 		</div>
   );
 };
 
-const ShoppingItem = ({ item, addItemsToCart }) => {
+const ShoppingItem = ({ item }) => {
   const {
     image,
     name,

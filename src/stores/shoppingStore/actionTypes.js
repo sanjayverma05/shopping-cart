@@ -1,0 +1,15 @@
+export const FETCH_ITEMS_REQUEST = "FETCH_ITEMS_REQUEST";
+export const FETCH_ITEMS_SUCCESS = "FETCH_ITEMS_SUCCESS";
+export const FETCH_ITEMS_FAILURE = "FETCH_ITEMS_FAILURE";
+export const REMOVE_SORT = "REMOVE_SORT";
+export const FILTER_SEARCH = "FILTER_SEARCH";
+export const REMOVE_FILTER = "REMOVE_FILTER";
+export const SCREEN_RESIZE = "SCREEN_RESIZE";
+export const SORT_HIGH_TO_LOW = "HIGH_TO_LOW";
+export const SORT_LOW_TO_HIGH = "LOW_TO_HIGH";
+export const SORT_DISCOUNT = "DISCOUNT";
+export const SORT_ITEMS = "SORT_ITEMS";
+export const RANGE_FILTER = "RANGE_FILTER";
+export const ADD_ITEM = "ADD_ITEM";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export const REDUCE_ITEM_COUNT = "REDUCE_ITEM_COUNT";

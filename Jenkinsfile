@@ -1,6 +1,12 @@
 pipeline {
     agent any 
     stages {
+        stage('Login to DockerHub') { 
+            steps {
+                echo 'Logging in';
+                docker login -u sanjayverma05 -p a24ccbe9-0300-4d88-8a9d-c3d30665759f
+            }
+        }
         stage('Build') { 
             steps {
                 echo 'building';

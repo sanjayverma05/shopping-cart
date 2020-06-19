@@ -25,4 +25,12 @@ pipeline {
             }
         }
     }
+    post { 
+        always { 
+            echo 'cleaning workspace';
+            cleanWs();
+            echo 'deleting images';
+            docker rmi sanjayverma05/shopping-cart
+        }
+    }
 }

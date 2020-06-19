@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                console.log('building')
+                echo 'building';
             }
         }
         stage('Test') { 
             steps {
-                 console.log('testing')
+                 echo 'testing';
             }
         }
         stage('Deploy') { 
             steps {
-                console.log('deploying')
+                echo 'deploying';
             }
         }
     }

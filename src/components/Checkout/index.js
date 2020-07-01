@@ -1,4 +1,7 @@
 import React, { useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addItems, removeItem, reduceItem } from "Stores/shoppingStore/actions";
+
 import styles from "./index.scss";
 import { AppContext } from "Components/App";
 
@@ -55,7 +58,14 @@ const CheckoutItem = ({ item, index, reduceItemFromCart, addItemsToCart, currenc
 };
 
 const Checkout = () => {
-	const { selectedItems, reduceItemFromCart, addItemsToCart, currency } = useContext(AppContext);
+	const {items: selectedItems}=useSelector(state=>state.items.cart);
+	const currency  = useSelector((state) => state.currency);
+	const dispatch = useDispatch();
+	const addItemsToCart = item => dispatch(addItems(item));
+	const reduceItemFromCart = (item, isRemoveItem) => {
+		isRemoveItem ? dispatch(removeItem(item)) : dispatch(reduceItem(item))
+	};
+
 	const totalPayableAmount = selectedItems.reduce(function (a, b) {
 		return a + b.price["actual"] * b["_count"];
 	}, 0);

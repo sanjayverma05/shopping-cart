@@ -5,6 +5,7 @@
 	}
 	&__container {
 		border-bottom: 1px solid darkgray;
+		width: 100%;
 		@include breakpoint(xlarge) {
 			display: none;
 		}

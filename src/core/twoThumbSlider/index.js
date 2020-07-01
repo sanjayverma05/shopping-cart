@@ -13,9 +13,7 @@ class TwoThumbSlider extends React.Component {
 	render() {
 		let {
 			currentMin,
-			currentMinValue,
 			currentMax,
-			currentMaxValue,
 			onUpdate,
 			onChange,
 			minFilterValue,
@@ -30,7 +28,7 @@ class TwoThumbSlider extends React.Component {
 					mode={2}
 					onUpdate={onUpdate}
 					onChange={onChange}
-					values={[currentMin || currentMinValue, currentMax || currentMaxValue]}
+					values={[currentMin , currentMax ]}
 				>
 					<Handles>
 						{({ handles, getHandleProps }) => (

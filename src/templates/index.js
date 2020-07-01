@@ -1,5 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ShoppingCart from "Components/App";
+import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(<ShoppingCart />, document.getElementById("root"));
+import App from "Components/ReduxApp";
+import shoppingStore from "Stores/shoppingStore";
+import {Provider} from 'react-redux';
+
+ReactDOM.hydrate(
+	<Provider store={shoppingStore}>
+        <Router >
+		    <App />
+        </Router>
+	</Provider>,
+	document.getElementById("root")
+);
